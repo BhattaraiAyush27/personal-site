@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Modern Scholar Design Tokens (Light Theme) */
+  --background: #F7F4EE;
+  --foreground: #22252B;
+  --surface: #FFFFFF;
+  --navy: #1F2A44;
+  --navy-dark: #141B2D;
+  --teal: #1F5C63;
+  --teal-hover: #164348;
+  --teal-muted: #E2ECEC;
+  --bronze: #8E5F32;              /* Accessible text variant (4.99:1 on #F7F4EE) */
+  --bronze-decorative: #9A6A3A;   /* Decorative lines and large accents */
+  --bronze-muted: #F3ECE4;
+  --border: #E5DFD5;
+  --muted: #525660;               /* Accessible secondary text (~6.8:1 on #F7F4EE) */
+}
+
+.dark {
+  /* Modern Scholar Design Tokens (Dark Theme / Night Study) */
+  --background: #11141A;
+  --foreground: #E3E6ED;
+  --surface: #181D26;
+  --navy: #F0F4FC;                /* Prominent headings in dark mode */
+  --navy-dark: #FFFFFF;
+  --teal: #3AB8B3;                /* High-contrast accessible teal */
+  --teal-hover: #5FE3DE;
+  --teal-muted: #162F36;
+  --bronze: #E2A66C;              /* Accessible warm bronze on dark background */
+  --bronze-decorative: #C68950;
+  --bronze-muted: #27211B;
+  --border: #262E3B;              /* Dark divider border */
+  --muted: #9AA3B2;               /* Legible secondary text (~7.4:1 contrast on #11141A) */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Clear and accessible keyboard focus state */
+  :focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Skip link for keyboard accessibility */
+  .skip-to-content {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--navy);
+    color: var(--background);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 0.375rem 0.375rem;
+  }
+
+  .skip-to-content:focus {
+    left: 1rem;
+    top: 0;
+  }
+}
