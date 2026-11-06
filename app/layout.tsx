@@ -5,11 +5,11 @@ import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "Ayush Bhattarai — Software Engineer",
+    default: "Ayush Bhattarai — Software Developer",
     template: "%s | Ayush Bhattarai",
   },
   description:
-    "Personal website, engineering portfolio, and technical notes of Ayush Bhattarai.",
+    "Personal website, software portfolio, and writings of Ayush Bhattarai. Software developer based in Nepal working with React, TypeScript, PHP, and Laravel.",
   metadataBase: new URL("https://example.com"), // Placeholder domain until custom domain configured
 };
 
@@ -20,14 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body className="font-sans antialiased selection:bg-teal/20 selection:text-navy">
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&d)){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})()`,
           }}
         />
-      </head>
-      <body className="font-sans antialiased selection:bg-teal/20 selection:text-navy">
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

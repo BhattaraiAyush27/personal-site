@@ -16,7 +16,7 @@ export default function ContactPage() {
             Contact
           </h1>
           <p className="mt-4 text-base sm:text-lg text-foreground/85 leading-relaxed">
-            I am currently open to software engineering opportunities during November–December 2026.
+            I am a software developer based in Nepal. I welcome conversations regarding software engineering opportunities, business systems architecture, or shared intellectual interests.
           </p>
         </header>
 

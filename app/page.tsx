@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { ProjectCard } from "@/components/ui/ProjectCard";
+import { ProjectPreview } from "@/components/ui/ProjectPreview";
 
 export default function HomePage() {
   return (
@@ -10,51 +10,70 @@ export default function HomePage() {
       <section aria-labelledby="intro-heading">
         <Container>
           <div className="max-w-2xl">
-            <h1
-              id="intro-heading"
-              className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-navy leading-tight"
-            >
-              Building thoughtful software with React, TypeScript, and Laravel.
-            </h1>
-            <p className="mt-6 text-base sm:text-lg leading-relaxed text-foreground/90">
-              Welcome to my digital home. I design and build full-stack web applications,
-              maintainable frontend architectures, and resilient technical systems with an emphasis
-              on simplicity and long-term readability.
+            {/* Thematic kicker */}
+            <p className="text-xs sm:text-sm font-mono uppercase tracking-widest text-bronze font-semibold mb-4">
+              Software Development &middot; Neurotechnology &middot; Ideas
             </p>
 
-            <aside
-              aria-label="Editorial note"
-              className="mt-6 border-l-2 border-bronze/60 bg-bronze-muted/30 px-4 py-3 text-xs leading-relaxed text-muted"
+            <h1
+              id="intro-heading"
+              className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-navy leading-tight sm:leading-tight md:leading-[1.15]"
             >
-              <strong className="font-semibold text-bronze">Note:</strong> Customize this section with your primary areas of engineering focus, research interests, and current availability for November–December 2026 roles.
-            </aside>
+              Building useful software. Exploring complex ideas.
+            </h1>
+
+            <div className="mt-6 space-y-4 text-base sm:text-lg leading-relaxed text-foreground/90">
+              <p>
+                I&apos;m a software developer based in Nepal, working primarily with{" "}
+                <strong className="font-semibold text-navy">
+                  React, TypeScript, PHP, and Laravel
+                </strong>
+                .
+              </p>
+              <p>
+                My professional experience spans business applications, including production
+                tracking, ERP systems, e-commerce, and operational management tools.
+              </p>
+              <p>
+                I&apos;m interested in building reliable, well-designed software while developing a
+                deeper understanding of{" "}
+                <strong className="font-semibold text-navy">
+                  mathematics, neurotechnology, and the systems that connect humans with machines
+                </strong>
+                .
+              </p>
+              <p>
+                This website is where I share what I build, document what I learn, and explore
+                ideas worth thinking about.
+              </p>
+            </div>
 
             {/* Restrained Editorial Cross-Navigation */}
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium">
               <Link
                 href="/projects"
-                className="text-teal hover:underline inline-flex items-center gap-1"
+                className="text-teal hover:underline inline-flex items-center gap-1 font-semibold"
               >
-                Selected projects &rarr;
+                Explore My Work &rarr;
+              </Link>
+              <Link
+                href="/writing"
+                className="text-navy hover:text-teal hover:underline transition-colors"
+              >
+                Read My Writing
               </Link>
               <Link
                 href="/resume"
-                className="text-navy hover:text-teal hover:underline transition-colors"
-              >
-                Curriculum Vitae
-              </Link>
-              <Link
-                href="/about"
                 className="text-muted hover:text-navy transition-colors"
               >
-                About &amp; Background
+                View R&eacute;sum&eacute;
               </Link>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Selected Projects Section */}
+      {/* Selected Projects / Professional Work Section */}
       <section aria-labelledby="featured-projects-heading" className="border-t border-border pt-12 sm:pt-16">
         <Container>
           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-8">
@@ -63,10 +82,10 @@ export default function HomePage() {
                 id="featured-projects-heading"
                 className="font-serif text-2xl sm:text-3xl font-bold text-navy"
               >
-                Selected Projects
+                Selected Work
               </h2>
               <p className="mt-1 text-sm text-muted">
-                Case studies and applications highlighting technical depth and architectural decisions.
+                Practical systems demonstrating engineering competence, workflow tracking, and reliable software architecture.
               </p>
             </div>
             <Link
@@ -78,21 +97,29 @@ export default function HomePage() {
           </div>
 
           <div className="space-y-8">
-            <ProjectCard
-              title="[Project 1 Placeholder: Full-Stack Web Application]"
-              description="A scalable web application built with React, TypeScript, and Laravel. Features resilient state management, clean API contracts, and an accessible interface."
-              tags={["React", "TypeScript", "Laravel", "PostgreSQL"]}
-              status="Case Study"
-              year="2026"
-              href="/projects"
+            <ProjectPreview
+              title="Production Line Management System"
+              oneLiner="An operational system for tracking manufacturing workflows, station handoffs, and assembly throughput in real time."
+              contribution="Architected the reactive station state model in React and TypeScript, designed RESTful backend API contracts in Laravel for batch order routing, and engineered responsive floor dashboards for supervisors."
+              technologies={["React", "TypeScript", "Laravel", "MySQL", "Tailwind CSS", "REST APIs"]}
+              type="Professional experience · Case study"
+              caseStudyHref="/projects/production-line-management"
             />
-            <ProjectCard
-              title="[Project 2 Placeholder: Technical Architecture or Tool]"
-              description="Specialized tooling or frontend component system focused on performance, strict typing, and developer ergonomics."
-              tags={["TypeScript", "Next.js", "Tailwind CSS", "Architecture"]}
-              status="In Progress"
-              year="2026"
-              href="/projects"
+            <ProjectPreview
+              title="Accounting / ERP & Restaurant Billing Systems"
+              oneLiner="Business platforms handling high-frequency transactions, double-entry ledger records, restaurant billing, and inventory reconciliation."
+              contribution="Engineered transactional schemas in MySQL/PostgreSQL, developed billing and receipt workflows, and implemented validation rules to ensure ledger consistency across concurrent user operations."
+              technologies={["PHP", "Laravel", "MySQL", "PostgreSQL", "JavaScript", "Tailwind CSS"]}
+              type="Professional experience · Case study"
+              caseStudyHref="/projects"
+            />
+            <ProjectPreview
+              title="Marmat Sewa — Repair Management SaaS"
+              oneLiner="A multi-tenant SaaS platform built to streamline equipment maintenance ticketing, repair job lifecycle tracking, and client billing."
+              contribution="Designed the multi-tenant database isolation schema, implemented role-based authorization rules (admin, technician, client), and built the full-stack system with Next.js, TypeScript, and Laravel."
+              technologies={["Next.js", "React", "TypeScript", "Laravel", "PostgreSQL", "Tailwind CSS"]}
+              type="Independent project · In development"
+              caseStudyHref="/projects"
             />
           </div>
         </Container>
@@ -110,7 +137,7 @@ export default function HomePage() {
                 Writing &amp; Notes
               </h2>
               <p className="mt-1 text-sm text-muted">
-                Essays on software engineering, architecture, mathematics, and philosophy.
+                Explorations across software design, mathematics, neurotechnology, and philosophy.
               </p>
             </div>
             <Link
@@ -121,24 +148,45 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <article className="border-t border-border pt-6">
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
-              <h3 className="font-serif text-xl font-bold text-navy">
-                <Link
-                  href="/writing"
-                  className="hover:text-teal focus-visible:outline-none focus-visible:underline transition-colors"
-                >
-                  [Article Placeholder: Title of your first technical essay or tutorial]
-                </Link>
-              </h3>
-              <span className="text-xs font-mono text-muted shrink-0">
-                Forthcoming
-              </span>
-            </div>
-            <p className="text-sm leading-relaxed text-foreground/85 max-w-2xl">
-              Summary placeholder: A breakdown of architectural patterns, lessons learned, or engineering explorations. Coming soon.
-            </p>
-          </article>
+          <div className="space-y-6">
+            <article className="border-t border-border pt-6">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                <h3 className="font-serif text-xl font-bold text-navy">
+                  <Link
+                    href="/writing"
+                    className="hover:text-teal focus-visible:outline-none focus-visible:underline transition-colors"
+                  >
+                    Architectural Simplicity in Business Web Systems
+                  </Link>
+                </h3>
+                <span className="text-xs font-mono text-muted shrink-0">
+                  Forthcoming
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/85 max-w-2xl">
+                Reflections on balancing practical problem-solving with clean domain models in production-line and ERP architectures.
+              </p>
+            </article>
+
+            <article className="border-t border-border pt-6">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                <h3 className="font-serif text-xl font-bold text-navy">
+                  <Link
+                    href="/writing"
+                    className="hover:text-teal focus-visible:outline-none focus-visible:underline transition-colors"
+                  >
+                    Foundational Mathematics &amp; Neurotechnology Notes
+                  </Link>
+                </h3>
+                <span className="text-xs font-mono text-muted shrink-0">
+                  Research Note
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/85 max-w-2xl">
+                Documenting self-directed study in computational neuroscience, linear algebra, and brain-computer interface paradigms.
+              </p>
+            </article>
+          </div>
         </Container>
       </section>
     </div>
