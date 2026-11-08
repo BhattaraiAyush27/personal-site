@@ -98,6 +98,25 @@ export default function HomePage() {
 
           <div className="space-y-8">
             <ProjectPreview
+              title="Bhetiyo — Cross-Border Social Commerce Platform"
+              oneLiner="Cross-border social-commerce platform connecting Nepali buyers with Chinese suppliers and local sellers through shoppable video feeds, live streaming, and a Nepal customs tariff engine."
+              contribution="Built the social video layer (ranked For-You reels feed, LiveKit live streaming, single-active-player video lifecycle), implemented the Nepal HS-code customs and tariff engine with eSewa payments, shipped the web admin console, and expanded the .NET 8 CQRS backend API from 218 to 341 endpoints."
+              technologies={[
+                ".NET 8",
+                "C#",
+                "Flutter",
+                "Dart",
+                "Next.js 16",
+                "TypeScript",
+                "EF Core",
+                "MySQL",
+                "Redis",
+                "LiveKit",
+              ]}
+              type="Production Platform · Case study"
+              caseStudyHref="/projects/bhetiyo"
+            />
+            <ProjectPreview
               title="Production Line Management System"
               oneLiner="An operational system for tracking manufacturing workflows, station handoffs, and assembly throughput in real time."
               contribution="Architected the reactive station state model in React and TypeScript, designed RESTful backend API contracts in Laravel for batch order routing, and engineered responsive floor dashboards for supervisors."

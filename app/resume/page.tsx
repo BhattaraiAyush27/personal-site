@@ -38,28 +38,28 @@ export default function ResumePage() {
               Languages &amp; Core
             </dt>
             <dd className="text-foreground/85 leading-relaxed">
-              TypeScript, JavaScript (ESNext), PHP, React, Next.js, HTML5, CSS3, Tailwind CSS
+              TypeScript, JavaScript (ESNext), C#, Dart, PHP, React, Next.js, Flutter, HTML5, CSS3, Tailwind CSS
             </dd>
 
             <dt className="font-semibold text-navy">
               Frameworks &amp; Data
             </dt>
             <dd className="text-foreground/85 leading-relaxed">
-              Laravel, RESTful API design, PostgreSQL, MySQL, Relational Database Modeling
+              .NET 8, ASP.NET Core, Laravel, EF Core, MediatR (CQRS), MySQL, PostgreSQL, Redis, MinIO, RESTful APIs
             </dd>
 
             <dt className="font-semibold text-navy">
               Domain Experience
             </dt>
             <dd className="text-foreground/85 leading-relaxed">
-              Production-Line Tracking, Accounting &amp; ERP, Restaurant Billing, Parking &amp; Ticketing, E-Commerce
+              Cross-Border Social Commerce, Shoppable Video Feeds, Customs &amp; Tariff Engines, Production-Line Tracking, Accounting &amp; ERP, POS Billing
             </dd>
 
             <dt className="font-semibold text-navy">
               Engineering Practices
             </dt>
             <dd className="text-foreground/85 leading-relaxed">
-              Pragmatic Architecture, Web Accessibility (WCAG 2.1 AA), Independent System Reasoning, Git Workflow
+              CQRS Architecture, Mobile Performance &amp; Memory Lifecycle, Web Accessibility (WCAG 2.1 AA), Automated Testing, Git Workflow
             </dd>
           </dl>
         </section>
@@ -74,14 +74,45 @@ export default function ResumePage() {
             <article>
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
                 <h3 className="font-serif text-lg font-bold text-navy">
-                  Software Developer &middot; Web Applications &amp; Business Systems
+                  Full-Stack &amp; Mobile Developer &middot; Bhetiyo
                 </h3>
                 <span className="text-xs font-mono text-muted shrink-0">
-                  [Dates / Ongoing Placeholder]
+                  Cross-Border Social Commerce
                 </span>
               </div>
               <p className="text-xs font-mono text-bronze mb-3">
-                [Company / Client Engagement Placeholder] &middot; Nepal
+                Flutter &middot; .NET 8 &middot; Next.js 16 &middot; MySQL &middot; Redis
+              </p>
+              <ul className="list-disc list-outside ml-4 space-y-2 text-sm text-foreground/85 leading-relaxed">
+                <li>
+                  Engineered core features for a cross-border social-commerce platform connecting Nepali buyers with Chinese suppliers and local merchants.
+                </li>
+                <li>
+                  Shipped ~42k net lines of production code across mobile, backend, and web repositories, expanding backend coverage from 218 to 341 endpoints and doubling automated test suites (80 to 176 backend tests).
+                </li>
+                <li>
+                  Designed an Instagram/TikTok-style shoppable video feed: ranked &ldquo;For You&rdquo; reels, follow graph, stories, and LiveKit live streaming. Implemented single-active-player lifecycle management and image decoding at screen size to eliminate memory leaks and device overheating.
+                </li>
+                <li>
+                  Implemented an automated Nepal HS-code customs and tariff engine, eSewa payment integration, verified-purchase reviews, and seller payouts.
+                </li>
+                <li>
+                  Built the Next.js administrative console (moderation, payouts, suspensions, audit logs) and implemented App Store submission requirements (privacy manifests, in-app account deletion, dark mode).
+                </li>
+              </ul>
+            </article>
+
+            <article>
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                <h3 className="font-serif text-lg font-bold text-navy">
+                  Software Developer &middot; Web Applications &amp; Business Systems
+                </h3>
+                <span className="text-xs font-mono text-muted shrink-0">
+                  Production Systems &amp; ERP
+                </span>
+              </div>
+              <p className="text-xs font-mono text-bronze mb-3">
+                React &middot; TypeScript &middot; PHP &middot; Laravel &middot; MySQL
               </p>
               <ul className="list-disc list-outside ml-4 space-y-2 text-sm text-foreground/85 leading-relaxed">
                 <li>
@@ -95,9 +126,6 @@ export default function ResumePage() {
                 </li>
                 <li>
                   Implemented specialized commercial tools including restaurant billing systems, parking and ticketing solutions, and e-commerce platforms.
-                </li>
-                <li>
-                  Prioritized simplicity, maintainable code architectures, and long-term readability over fleeting abstractions.
                 </li>
               </ul>
             </article>

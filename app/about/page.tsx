@@ -29,12 +29,13 @@ export default function AboutPage() {
           </p>
 
           <p>
-            My primary technologies are{" "}
+            My core technologies include{" "}
             <strong className="font-semibold text-navy">
-              React, TypeScript, PHP, and Laravel
+              React, TypeScript, C# (.NET 8), Flutter, PHP, and Laravel
             </strong>
-            . I&apos;ve contributed to applications involving production-line management,
-            accounting and ERP, restaurant billing, parking and ticketing, and e-commerce.
+            . I&apos;ve contributed to applications involving cross-border social commerce,
+            production-line management, accounting and ERP, restaurant billing, parking and
+            ticketing, and operational management tools.
           </p>
 
           <p>
