@@ -1,257 +1,253 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Container } from "@/components/ui/Container";
+import { CaseStudyLayout, CaseStudySection } from "@/components/layout/CaseStudyLayout";
 
 export const metadata: Metadata = {
   title: "Case Study: Production Line Management System",
   description:
-    "An architectural case study on designing an operational tracking system for manufacturing workflows using React, TypeScript, and Laravel.",
+    "An architectural case study detailing the design and engineering of an operational tracking system for manufacturing workflows using React, TypeScript, and Laravel.",
 };
 
 export default function ProductionLineCaseStudyPage() {
+  const metadata = {
+    role: "Full-Stack Developer",
+    technologies: ["React", "TypeScript", "Laravel", "PHP", "MySQL", "Tailwind CSS", "REST APIs"],
+    database: "MySQL (Relational)",
+    status: "Production Deployment",
+  };
+
   return (
-    <div className="py-12 sm:py-16 md:py-20">
-      <Container size="narrow">
-        {/* Navigation Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
-          <Link
-            href="/projects"
-            className="text-xs sm:text-sm font-medium text-teal hover:underline inline-flex items-center gap-1"
-          >
-            &larr; Back to Selected Work
-          </Link>
-        </nav>
+    <CaseStudyLayout
+      title="Production Line Management System"
+      subtitle="An operational system engineered for tracking manufacturing workflows, station handoffs, and assembly throughput in real time."
+      category="Professional Experience · Case Study"
+      metadata={metadata}
+      backHref="/projects"
+      backLabel="Back to Selected Work"
+    >
+      {/* 1. Overview */}
+      <CaseStudySection title="1. Overview" id="overview-heading">
+        <p>
+          The Production Line Management System is an operational web platform designed to track
+          discrete assembly workflows in a manufacturing setting. It provides real-time visibility
+          into job order progress across assembly stations, replaces manual status logs with digital
+          verification, and surfaces live throughput metrics for shop-floor supervisors.
+        </p>
+        <p>
+          The application serves two distinct user groups: floor operators responsible for executing
+          station tasks and updating job status via workstation terminals, and operations managers
+          requiring consolidated metrics on line efficiency, pending queues, and inspection results.
+        </p>
 
-        {/* Masthead */}
-        <header className="border-b border-border pb-8">
-          <p className="text-xs sm:text-sm font-mono uppercase tracking-widest text-bronze font-semibold mb-3">
-            Professional Experience &middot; Case Study
+        {/* Workflow Architecture Diagram */}
+        <div className="my-6 rounded-lg border border-border bg-surface/60 p-5 font-mono text-xs text-foreground/90 overflow-x-auto">
+          <p className="text-[11px] font-sans font-semibold uppercase tracking-wider text-bronze mb-3">
+            System Workflow &amp; State Validation Architecture
           </p>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-navy tracking-tight leading-tight">
-            Production Line Management System
-          </h1>
-          <p className="mt-4 text-lg sm:text-xl text-foreground/90 font-medium leading-relaxed">
-            An operational system engineered for tracking manufacturing workflows, station
-            handoffs, and assembly throughput in real time.
-          </p>
+          <pre className="leading-relaxed whitespace-pre font-mono text-[11px] sm:text-xs">
+{`[ Work Order Created ]
+         │
+         ▼
+┌──────────────────┐
+│  Material Intake │ ──(Batch Assignment)──┐
+└──────────────────┘                       │
+         │                                 │ (Idempotent State Check)
+         ▼                                 │
+┌──────────────────┐                       │
+│ Assembly Station │ ──(Status Mutation)───┤
+└──────────────────┘                       │
+         │                                 │
+         ▼                                 │
+┌──────────────────┐                       │
+│ Quality Control  │ ──(QA Verification)───┤
+└──────────────────┘                       │
+         │                                 │
+         ▼                                 ▼
+┌──────────────────┐            ┌────────────────────────┐
+│ Final Packaging  │            │ Supervisor Live Status │
+└──────────────────┘            └────────────────────────┘`}
+          </pre>
+        </div>
+      </CaseStudySection>
 
-          {/* Project Metadata Grid */}
-          <dl className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-border/80 pt-6 text-xs font-mono">
-            <div>
-              <dt className="text-muted uppercase tracking-wider text-[11px]">My Role</dt>
-              <dd className="mt-1 font-semibold text-navy">Full-Stack Developer</dd>
-            </div>
-            <div>
-              <dt className="text-muted uppercase tracking-wider text-[11px]">Primary Tech</dt>
-              <dd className="mt-1 font-semibold text-navy">React, TypeScript, Laravel</dd>
-            </div>
-            <div>
-              <dt className="text-muted uppercase tracking-wider text-[11px]">Database</dt>
-              <dd className="mt-1 font-semibold text-navy">MySQL &middot; Relational</dd>
-            </div>
-            <div>
-              <dt className="text-muted uppercase tracking-wider text-[11px]">Status</dt>
-              <dd className="mt-1 font-semibold text-teal">Production System</dd>
-            </div>
-          </dl>
-        </header>
+      {/* 2. The Operational Problem */}
+      <CaseStudySection title="2. The Operational Problem" id="problem-heading">
+        <p>
+          Prior to this implementation, assembly progress was tracked through physical job tickets
+          and handwritten tally sheets. While simple to deploy, this approach introduced severe
+          operational friction as manufacturing volume increased:
+        </p>
+        <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
+          <li>
+            <strong className="text-navy">Station Starvation &amp; Bottlenecks:</strong> When an
+            upstream machine experienced downtime or parts shortage, downstream stations were
+            idled. Floor supervisors had no proactive indicator of these delays until physical queues
+            visibly emptied.
+          </li>
+          <li>
+            <strong className="text-navy">Traceability Deficits:</strong> If an assembly defect was
+            detected during final packaging or post-dispatch, locating the specific workstation,
+            batch run, or operator log required hours of manual ticket cross-referencing.
+          </li>
+          <li>
+            <strong className="text-navy">Reporting Latency:</strong> Daily production metrics
+            could only be compiled hours after a shift concluded, preventing managers from making
+            adjustments during active production runs.
+          </li>
+        </ul>
+      </CaseStudySection>
 
-        {/* Content Body */}
-        <article className="mt-10 space-y-10 text-foreground/85 text-base sm:text-lg leading-relaxed">
-          {/* 1. Context & The Practical Problem */}
-          <section aria-labelledby="problem-heading">
-            <h2
-              id="problem-heading"
-              className="font-serif text-2xl sm:text-3xl font-bold text-navy tracking-tight mb-4"
-            >
-              1. Context &amp; The Practical Problem
-            </h2>
-            <div className="space-y-4">
-              <p>
-                In manufacturing and assembly environments, operations move through discrete, sequential
-                stages: raw material issuance, component assembly, quality-control inspection, and
-                final batch packaging.
-              </p>
-              <p>
-                Before this system was implemented, workflow tracking relied on manual paper logs
-                and end-of-shift reporting. This led to persistent operational blind spots:
-              </p>
-              <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
-                <li>
-                  <strong className="text-navy">Station Starvation &amp; Bottlenecks:</strong> Floor
-                  supervisors had no live visibility into whether upstream delays were halting
-                  downstream assembly stations.
-                </li>
-                <li>
-                  <strong className="text-navy">Traceability Gaps:</strong> When quality defects
-                  occurred, determining the specific station, batch run, or timestamp required
-                  manual audit logs.
-                </li>
-                <li>
-                  <strong className="text-navy">Data Lag:</strong> Throughput metrics could only be
-                  reconciled hours after a shift concluded, preventing rapid managerial
-                  interventions during active production.
-                </li>
-              </ul>
-            </div>
-          </section>
+      {/* 3. My Role & Responsibilities */}
+      <CaseStudySection title="3. My Role &amp; Responsibilities" id="role-heading">
+        <p>
+          As a full-stack developer on the project, I was responsible for delivering the core
+          station tracking interface, the backend routing architecture, and the data schema
+          supporting batch transitions. My personal responsibilities included:
+        </p>
+        <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
+          <li>
+            <strong className="text-navy">Frontend Station Terminal:</strong> Architected the
+            touchscreen interface in React and TypeScript, handling input from barcode scanners,
+            optimistic local UI updates, and clear status feedback.
+          </li>
+          <li>
+            <strong className="text-navy">Backend API Contracts:</strong> Designed and implemented
+            RESTful endpoints in Laravel for order creation, station handoff transitions, and batch
+            cancellations.
+          </li>
+          <li>
+            <strong className="text-navy">Relational Data Modeling:</strong> Structured MySQL database
+            schemas with foreign-key constraints, audit log tables, and indexing optimized for
+            frequent status lookups by active order ID.
+          </li>
+          <li>
+            <strong className="text-navy">Supervisor Summary Dashboard:</strong> Built responsive
+            overview pages aggregating station queue lengths, active cycle times, and inspection pass
+            rates for floor monitors.
+          </li>
+        </ul>
+      </CaseStudySection>
 
-          {/* 2. My Role & Personal Contributions */}
-          <section aria-labelledby="role-heading">
-            <h2
-              id="role-heading"
-              className="font-serif text-2xl sm:text-3xl font-bold text-navy tracking-tight mb-4"
-            >
-              2. My Role &amp; Personal Contributions
-            </h2>
-            <div className="space-y-4">
-              <p>
-                I was responsible for developing and maintaining the full-stack architecture
-                powering station tracking and supervisor monitoring:
-              </p>
-              <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
-                <li>
-                  <strong className="text-navy">Station Dashboard Architecture:</strong> Built the
-                  station interface using React and TypeScript, managing local UI state, barcode/scanner
-                  inputs, and validation feedback.
-                </li>
-                <li>
-                  <strong className="text-navy">Backend APIs &amp; Data Modeling:</strong> Designed
-                  Laravel REST API endpoints and MySQL schemas to record batch transitions, order
-                  statuses, and operator actions.
-                </li>
-                <li>
-                  <strong className="text-navy">Concurrency &amp; Idempotency Controls:</strong>{" "}
-                  Implemented transactional database locks in Laravel to ensure that double-scans or
-                  rapid operator submissions could never corrupt order progression states.
-                </li>
-                <li>
-                  <strong className="text-navy">Supervisor Throughput Views:</strong> Created responsive
-                  metrics dashboards allowing managers to inspect station queue lengths, active run
-                  times, and quality inspection pass rates.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          {/* 3. Technical Challenges & Architectural Decisions */}
-          <section aria-labelledby="challenges-heading">
-            <h2
-              id="challenges-heading"
-              className="font-serif text-2xl sm:text-3xl font-bold text-navy tracking-tight mb-4"
-            >
-              3. Technical Challenges &amp; Architectural Decisions
-            </h2>
-
-            <div className="space-y-6">
-              <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6">
-                <h3 className="font-serif text-xl font-bold text-navy mb-2">
-                  Challenge 1: Enforcing Strict Order Progression States
-                </h3>
-                <p className="text-sm sm:text-base leading-relaxed">
-                  In a busy factory setting, operators frequently tap rapidly or rescan barcodes
-                  if an interface feels unresponsive. Without strict validation, an order might
-                  accidentally bypass quality inspection or log multiple completion timestamps.
-                </p>
-                <p className="mt-3 text-sm sm:text-base leading-relaxed">
-                  <strong className="text-navy">Solution:</strong> We modeled work order lifecycles
-                  as an explicit state machine inside Laravel. State mutations are executed within
-                  database transactions with optimistic concurrency checks. An order cannot transition
-                  to &ldquo;Packaging&rdquo; unless all prerequisite &ldquo;Assembly&rdquo; and
-                  &ldquo;QA Passed&rdquo; assertions are verified, rejecting duplicate requests
-                  idempotently.
-                </p>
-              </div>
-
-              <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6">
-                <h3 className="font-serif text-xl font-bold text-navy mb-2">
-                  Challenge 2: Designing for Factory Floor Usability
-                </h3>
-                <p className="text-sm sm:text-base leading-relaxed">
-                  Floor stations use touchscreens and rugged tablets mounted on workstations.
-                  Operators frequently wear gloves and work under high fluorescent factory lighting.
-                  Delicate modal dialogs, tiny dropdowns, or complex multi-step forms create
-                  unacceptable operational friction.
-                </p>
-                <p className="mt-3 text-sm sm:text-base leading-relaxed">
-                  <strong className="text-navy">Solution:</strong> I designed an uncluttered,
-                  high-contrast interface adhering to WCAG AA guidelines. Interactive elements were
-                  engineered with minimum 48px touch targets, clear status badges (e.g. In Progress,
-                  On Hold, Completed), and direct hardware scanner integration that automatically
-                  focused input fields without requiring screen taps.
-                </p>
-              </div>
-
-              <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6">
-                <h3 className="font-serif text-xl font-bold text-navy mb-2">
-                  Challenge 3: Contract Typing Between Frontend &amp; Backend
-                </h3>
-                <p className="text-sm sm:text-base leading-relaxed">
-                  As production requirements adapted, discrepancies between Laravel API resource
-                  responses and React state models risked runtime errors on active floor devices.
-                </p>
-                <p className="mt-3 text-sm sm:text-base leading-relaxed">
-                  <strong className="text-navy">Solution:</strong> We enforced strict TypeScript
-                  interfaces for all API payloads and work-order data structures. By decoupling
-                  display components from raw network payloads through typed transformation
-                  utilities, any backend schema updates were detected and resolved during build time
-                  rather than on the plant floor.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* 4. What I Learned & Engineering Reflections */}
-          <section aria-labelledby="learnings-heading">
-            <h2
-              id="learnings-heading"
-              className="font-serif text-2xl sm:text-3xl font-bold text-navy tracking-tight mb-4"
-            >
-              4. Key Takeaways &amp; Engineering Reflections
-            </h2>
-            <div className="space-y-4">
-              <p>
-                Working on operational software highlighted fundamental truths about real-world
-                engineering:
-              </p>
-              <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
-                <li>
-                  <strong className="text-navy">Simplicity is a Feature:</strong> When systems are
-                  used by non-technical operators in high-stress environments, unnecessary
-                  abstractions and complex UI hierarchies lead to user error and support overhead.
-                </li>
-                <li>
-                  <strong className="text-navy">Resilience at the Boundaries:</strong> Handling edge
-                  cases—scanner disconnects, temporary network drops, and duplicate requests—is what
-                  separates toy projects from production-grade enterprise software.
-                </li>
-                <li>
-                  <strong className="text-navy">User Context Dictates Architecture:</strong> Building
-                  effective software requires understanding the physical constraints of the
-                  operator just as deeply as the technical stack.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          {/* Cross-navigation */}
-          <div className="border-t border-border pt-8 mt-12 flex flex-wrap items-center justify-between gap-4 text-sm font-medium">
-            <Link
-              href="/projects"
-              className="text-teal hover:underline inline-flex items-center gap-1 font-semibold"
-            >
-              &larr; View All Projects
-            </Link>
-            <Link
-              href="/contact"
-              className="text-navy hover:text-teal hover:underline transition-colors"
-            >
-              Discuss Technical Details &rarr;
-            </Link>
+      {/* 4. Technology Stack */}
+      <CaseStudySection title="4. Technology Stack" id="tech-heading">
+        <p>
+          We chose proven, maintainable technologies that prioritized long-term reliability and
+          straightforward maintainability over complex runtime environments:
+        </p>
+        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-3">
+          <div className="rounded border border-border bg-surface/40 p-4">
+            <dt className="font-semibold text-navy">Frontend: React &amp; TypeScript</dt>
+            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
+              Provides strict typing across work-order models, deterministic client state transitions,
+              and low-overhead DOM rendering on floor terminals.
+            </dd>
           </div>
-        </article>
-      </Container>
-    </div>
+          <div className="rounded border border-border bg-surface/40 p-4">
+            <dt className="font-semibold text-navy">Backend: PHP &amp; Laravel</dt>
+            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
+              Delivers reliable database transaction management, structured routing, request
+              validation, and clean domain services for order lifecycle management.
+            </dd>
+          </div>
+          <div className="rounded border border-border bg-surface/40 p-4">
+            <dt className="font-semibold text-navy">Database: MySQL (InnoDB)</dt>
+            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
+              Enforces ACID transactional guarantees, row-level locking for concurrent station updates,
+              and relational integrity across work orders, stations, and logs.
+            </dd>
+          </div>
+          <div className="rounded border border-border bg-surface/40 p-4">
+            <dt className="font-semibold text-navy">Styling: Tailwind CSS</dt>
+            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
+              Allowed rapid construction of accessible, high-contrast user interfaces with
+              touch-friendly sizing (48px+ touch targets) and consistent utility tokens.
+            </dd>
+          </div>
+        </dl>
+      </CaseStudySection>
+
+      {/* 5. Key Engineering Challenge */}
+      <CaseStudySection title="5. Key Engineering Challenge: Concurrency &amp; State Integrity" id="challenge-heading">
+        <p>
+          In a fast-paced manufacturing environment, workstation terminals are subject to erratic
+          user inputs. Operators frequently trigger multiple scanner inputs in rapid succession,
+          or multiple stations may simultaneously attempt to record actions on adjacent batch items.
+        </p>
+        <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6 space-y-3">
+          <h3 className="font-serif text-lg sm:text-xl font-bold text-navy">
+            The Problem: Out-of-Sequence Mutations &amp; Duplicate Records
+          </h3>
+          <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
+            Without strict safeguards, rapid double-scanning could cause an order to register
+            completion twice, log contradictory timestamps, or prematurely advance to &ldquo;Packaging&rdquo;
+            before receiving formal &ldquo;QA Inspection&rdquo; sign-off. In addition, temporary factory
+            Wi-Fi degradation meant client terminals could queue and resend requests out of order.
+          </p>
+        </div>
+      </CaseStudySection>
+
+      {/* 6. The Engineering Solution */}
+      <CaseStudySection title="6. The Engineering Solution" id="solution-heading">
+        <p>
+          To ensure absolute data consistency, I implemented a two-part architectural pattern
+          combining an explicit backend state machine with database transaction locks:
+        </p>
+        <div className="space-y-4 text-sm sm:text-base">
+          <div className="border-l-2 border-teal pl-4 space-y-1.5">
+            <h4 className="font-semibold text-navy">1. Enforced State Machine Transition Rules</h4>
+            <p className="text-foreground/85 leading-relaxed">
+              Every job order lifecycle was modeled as an explicit state graph (e.g. <code>PENDING</code> &rarr;{" "}
+              <code>IN_ASSEMBLY</code> &rarr; <code>AWAITING_QA</code> &rarr; <code>QA_PASSED</code> &rarr;{" "}
+              <code>PACKAGED</code>). Each transition required validating that all prerequisite conditions were
+              satisfied before the state could advance.
+            </p>
+          </div>
+
+          <div className="border-l-2 border-teal pl-4 space-y-1.5">
+            <h4 className="font-semibold text-navy">2. Pessimistic Row Locking &amp; Idempotent API Keys</h4>
+            <p className="text-foreground/85 leading-relaxed">
+              Within Laravel, status mutation requests were wrapped in database transactions using{" "}
+              <code>SELECT ... FOR UPDATE</code> on the target order row. If a duplicate request arrived
+              with the same transition payload, the server recognized the current order state and
+              safely returned the existing record without applying redundant mutations.
+            </p>
+          </div>
+
+          <div className="border-l-2 border-teal pl-4 space-y-1.5">
+            <h4 className="font-semibold text-navy">3. Contract Synchronization with TypeScript</h4>
+            <p className="text-foreground/85 leading-relaxed">
+              I established shared TypeScript interface definitions reflecting the exact Laravel API
+              resource schemas. This prevented contract drift and ensured client-side validation
+              mirrored backend rules, notifying operators immediately if a barcode did not meet batch
+              criteria.
+            </p>
+          </div>
+        </div>
+      </CaseStudySection>
+
+      {/* 7. Lessons & Takeaways */}
+      <CaseStudySection title="7. Lessons &amp; Engineering Reflections" id="lessons-heading">
+        <p>
+          Building software for physical operations reinforced several core engineering principles:
+        </p>
+        <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
+          <li>
+            <strong className="text-navy">Simplicity Trumps Cleverness:</strong> High-stress workplace
+            tools must prioritize straightforward workflows and predictable behavior over complex,
+            multi-layer abstractions that are difficult to diagnose during a production stop.
+          </li>
+          <li>
+            <strong className="text-navy">Defensive Boundaries are Mandatory:</strong> Never rely
+            solely on frontend validation. In operational systems, network hiccups and unintended
+            double-taps are regular occurrences, making idempotent backend checks essential.
+          </li>
+          <li>
+            <strong className="text-navy">Ergonomics Extend Beyond Code:</strong> Developing a good
+            system requires understanding the physical workstation: screen distance, lighting,
+            hardware scanners, and glove use all inform UI layout, contrast, and tap targets.
+          </li>
+        </ul>
+      </CaseStudySection>
+    </CaseStudyLayout>
   );
 }
