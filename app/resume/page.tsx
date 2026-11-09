@@ -74,7 +74,7 @@ export default function ResumePage() {
             <article>
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
                 <h3 className="font-serif text-lg font-bold text-navy">
-                  Full-Stack &amp; Mobile Developer &middot; Bhetiyo
+                  Full-Stack &amp; Mobile Developer &middot; Cross-Border Social Commerce Platform
                 </h3>
                 <span className="text-xs font-mono text-muted shrink-0">
                   Cross-Border Social Commerce

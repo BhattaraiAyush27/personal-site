@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 import { CaseStudyLayout, CaseStudySection } from "@/components/layout/CaseStudyLayout";
 
 export const metadata: Metadata = {
-  title: "Case Study: Bhetiyo — Cross-Border Social Commerce Platform",
+  title: "Case Study: Cross-Border Social Commerce Platform",
   description:
-    "An architectural case study detailing the engineering, performance stabilization, and feature expansion of Bhetiyo, a cross-border social-commerce platform built with Flutter, .NET 8 CQRS, and Next.js.",
+    "An architectural case study detailing the engineering, performance stabilization, and feature expansion of a cross-border social-commerce platform built with Flutter, .NET 8 CQRS, and Next.js.",
 };
 
-export default function BhetiyoCaseStudyPage() {
+export default function CrossBorderCommerceCaseStudyPage() {
   const metadata = {
     role: "Full-Stack & Mobile Developer",
     technologies: [
@@ -30,25 +30,25 @@ export default function BhetiyoCaseStudyPage() {
 
   return (
     <CaseStudyLayout
-      title="Bhetiyo — Cross-Border Social Commerce Platform"
+      title="Cross-Border Social Commerce Platform"
       subtitle="Connecting Nepali consumers with international suppliers and local merchants through shoppable video feeds, live streaming, and a Nepal customs tariff engine."
       category="Production Platform · Case Study"
       metadata={metadata}
       backHref="/projects"
       backLabel="Back to Selected Work"
       nextProjectHref="/projects/production-line-management"
-      nextProjectLabel="Production Line Management System"
+      nextProjectLabel="Garment Factory PMS"
     >
       {/* 1. Overview */}
       <CaseStudySection title="1. Platform Overview" id="overview-heading">
         <p>
-          Bhetiyo is a cross-border social-commerce platform engineered specifically for the Nepali
-          market. It bridges local consumers directly with Chinese manufacturers and verified domestic
+          This application is a cross-border social-commerce platform engineered specifically for the Nepali
+          market. It bridges local consumers directly with international manufacturers and verified domestic
           sellers through an interactive, shoppable video experience combining short-form reels, live
           streaming broadcasts, group buying, and flash sales.
         </p>
         <p>
-          Unlike conventional e-commerce storefronts, Bhetiyo integrates a full landed-cost engine
+          Unlike conventional e-commerce storefronts, the platform integrates a full landed-cost engine
           that computes Nepal customs tariffs, HS-code duties, and cross-border freight fees in real
           time prior to checkout.
         </p>
@@ -80,7 +80,7 @@ export default function BhetiyoCaseStudyPage() {
       </CaseStudySection>
 
       {/* 2. Before vs. After Sprint Metrics */}
-      <CaseStudySection title="2. Engineering Velocity & Measurable Outcomes" id="metrics-heading">
+      <CaseStudySection title="2. Engineering Velocity &amp; Measurable Outcomes" id="metrics-heading">
         <p>
           I joined an existing early-stage codebase and executed an intensive 6-day sprint (161 commits,
           averaging ~27 commits per day) focused on shipping the missing social infrastructure,

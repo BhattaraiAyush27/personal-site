@@ -98,7 +98,7 @@ export default function HomePage() {
 
           <div className="space-y-8">
             <ProjectPreview
-              title="Bhetiyo — Cross-Border Social Commerce Platform"
+              title="Cross-Border Social Commerce Platform"
               oneLiner="Cross-border social-commerce platform connecting Nepali buyers with Chinese suppliers and local sellers through shoppable video feeds, live streaming, and a Nepal customs tariff engine."
               contribution="Built the social video layer (ranked For-You reels feed, LiveKit live streaming, single-active-player video lifecycle), implemented the Nepal HS-code customs and tariff engine with eSewa payments, shipped the web admin console, and expanded the .NET 8 CQRS backend API from 218 to 341 endpoints."
               technologies={[
@@ -114,7 +114,7 @@ export default function HomePage() {
                 "LiveKit",
               ]}
               type="Production Platform · Case study"
-              caseStudyHref="/projects/bhetiyo"
+              caseStudyHref="/projects/cross-border-social-commerce"
             />
             <ProjectPreview
               title="Garment Factory Production Management System (PMS)"
