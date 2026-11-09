@@ -33,8 +33,8 @@ export default function ProductionLineCaseStudyPage() {
       metadata={metadata}
       backHref="/projects"
       backLabel="Back to Selected Work"
-      nextProjectHref="/projects/bhetiyo"
-      nextProjectLabel="Bhetiyo Social Commerce"
+      nextProjectHref="/projects/erp-accounting-pos"
+      nextProjectLabel="Multi-Tenant ERP &amp; Accounting Platform"
     >
       {/* 1. Overview */}
       <CaseStudySection title="1. Platform Overview" id="overview-heading">

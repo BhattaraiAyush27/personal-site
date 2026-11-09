@@ -135,6 +135,40 @@ export default function ResumePage() {
                 </li>
               </ul>
             </article>
+
+            <article>
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                <h3 className="font-serif text-lg font-bold text-navy">
+                  Core Full-Stack Developer &middot; Multi-Tenant ERP, Accounting &amp; POS Platform
+                </h3>
+                <span className="text-xs font-mono text-muted shrink-0">
+                  Dec 2025 &ndash; Oct 2026
+                </span>
+              </div>
+              <p className="text-xs font-mono text-bronze mb-3">
+                Laravel 10 &middot; React 18 &middot; TypeScript &middot; MySQL (Multi-Tenant) &middot; REST APIs
+              </p>
+              <ul className="list-disc list-outside ml-4 space-y-2 text-sm text-foreground/85 leading-relaxed">
+                <li>
+                  Built a primary share of an accounting, inventory, and POS platform for Nepali businesses over 10 months across 835 commits (~540k lines added), personally creating 1,049 live files (the largest individual share of the codebase).
+                </li>
+                <li>
+                  Delivered 74% of the platform&apos;s report controllers (28/38) and 67% of report pages (30/45), including statutory Nepal Inland Revenue Department (IRD) VAT registers for sales, purchases, and returns with Excel/PDF export generation.
+                </li>
+                <li>
+                  Created 129 database migrations (54% of total schema) and 26 backend helper classes (62%), including FIFO stock costing (<code>StockFIFOHelper</code>), backdated inventory recalculation (<code>BackdatedStockRecalculator</code>), and statutory VAT mapping.
+                </li>
+                <li>
+                  Helped scale the application from 87 to 366 backend controllers (~4.2&times;) and 90 to 472 UI pages (~5.2&times;), personally authoring 147 controllers and 221 frontend pages.
+                </li>
+                <li>
+                  Shipped end-to-end sales/purchase cycles (orders, invoices, returns), POS tab billing, thermal receipt printing, NCM courier logistics, payment webhooks, and a V3 external API.
+                </li>
+                <li>
+                  Hardened database consistency with 162 bug-fix commits, introduced uniqueness constraints on <code>(fiscal_year, invoice_number)</code> to prevent sequence collisions, and optimized multi-year general ledger queries.
+                </li>
+              </ul>
+            </article>
           </div>
         </section>
 

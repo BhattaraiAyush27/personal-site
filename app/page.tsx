@@ -125,12 +125,12 @@ export default function HomePage() {
               caseStudyHref="/projects/production-line-management"
             />
             <ProjectPreview
-              title="Accounting / ERP & Restaurant Billing Systems"
-              oneLiner="Business platforms handling high-frequency transactions, double-entry ledger records, restaurant billing, and inventory reconciliation."
-              contribution="Engineered transactional schemas in MySQL/PostgreSQL, developed billing and receipt workflows, and implemented validation rules to ensure ledger consistency across concurrent user operations."
-              technologies={["PHP", "Laravel", "MySQL", "PostgreSQL", "JavaScript", "Tailwind CSS"]}
+              title="Multi-Tenant ERP, Accounting & POS Platform"
+              oneLiner="Enterprise cloud platform for Nepali businesses spanning statutory VAT registers, double-entry financial accounting, FIFO inventory costing, and POS tab billing."
+              contribution="Over 835 commits (~540k lines added across 10 months), personally built 74% of report controllers (28/38), 67% of report pages (30/45), 54% of database migrations (129/241), and 62% of business logic helpers (26/42), including FIFO stock valuation, backdated cost recalculation, and statutory VAT export engines."
+              technologies={["Laravel 10", "PHP", "React 18", "TypeScript", "MySQL", "REST APIs", "Tailwind CSS"]}
               type="Professional experience · Case study"
-              caseStudyHref="/projects"
+              caseStudyHref="/projects/erp-accounting-pos"
             />
             <ProjectPreview
               title="Marmat Sewa — Repair Management SaaS"
