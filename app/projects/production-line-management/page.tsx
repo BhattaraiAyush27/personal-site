@@ -3,248 +3,379 @@ import type { Metadata } from "next";
 import { CaseStudyLayout, CaseStudySection } from "@/components/layout/CaseStudyLayout";
 
 export const metadata: Metadata = {
-  title: "Case Study: Production Line Management System",
+  title: "Case Study: Garment Factory Production Management System (PMS)",
   description:
-    "An architectural case study detailing the design and engineering of an operational tracking system for manufacturing workflows using React, TypeScript, and Laravel.",
+    "An architectural case study detailing the refactoring, multi-tenant engineering, domain service extraction, and test automation of a 106k-line garment-factory PMS built with Laravel 10, React 18, and TypeScript.",
 };
 
 export default function ProductionLineCaseStudyPage() {
   const metadata = {
-    role: "Full-Stack Developer",
-    technologies: ["React", "TypeScript", "Laravel", "PHP", "MySQL", "Tailwind CSS", "REST APIs"],
-    database: "MySQL (Relational)",
-    status: "Production Deployment",
+    role: "Full-Stack & Backend Architect",
+    technologies: [
+      "Laravel 10",
+      "PHP 8.2",
+      "React 18",
+      "TypeScript",
+      "MySQL",
+      "PHPUnit",
+      "Vitest",
+      "Tailwind CSS",
+    ],
+    database: "MySQL (Multi-Tenant, 115 Migrations)",
+    status: "Rehearsal Verified",
   };
 
   return (
     <CaseStudyLayout
-      title="Production Line Management System"
-      subtitle="An operational system engineered for tracking manufacturing workflows, station handoffs, and assembly throughput in real time."
+      title="Garment Factory Production Management System (PMS)"
+      subtitle="Architecting a multi-tenant factory operations platform on Laravel 10 and React 18/TypeScript with 3 portals (Super-Admin, Admin, Worker), a unified work-run state machine, and fail-closed test architecture."
       category="Professional Experience · Case Study"
       metadata={metadata}
       backHref="/projects"
       backLabel="Back to Selected Work"
+      nextProjectHref="/projects/bhetiyo"
+      nextProjectLabel="Bhetiyo Social Commerce"
     >
       {/* 1. Overview */}
-      <CaseStudySection title="1. Overview" id="overview-heading">
+      <CaseStudySection title="1. Platform Overview" id="overview-heading">
         <p>
-          The Production Line Management System is an operational web platform designed to track
-          discrete assembly workflows in a manufacturing setting. It provides real-time visibility
-          into job order progress across assembly stations, replaces manual status logs with digital
-          verification, and surfaces live throughput metrics for shop-floor supervisors.
+          This application is an enterprise-scale, multi-tenant Production Management System (PMS)
+          specifically engineered for commercial garment factories. It tracks the full manufacturing
+          lifecycle—from fabric roll intake and sample prototyping to high-volume assembly, quality
+          rejection routing, subcontracting, and commercial billing.
         </p>
         <p>
-          The application serves two distinct user groups: floor operators responsible for executing
-          station tasks and updating job status via workstation terminals, and operations managers
-          requiring consolidated metrics on line efficiency, pending queues, and inspection results.
+          The system spans three isolated portal interfaces:
         </p>
+        <ul className="list-disc list-outside ml-6 space-y-1.5 text-base text-foreground/85">
+          <li>
+            <strong className="text-navy">Super-Admin Portal:</strong> Platform-wide tenant provisioning,
+            multi-database migration orchestration, company onboarding, and cross-tenant auditing.
+          </li>
+          <li>
+            <strong className="text-navy">Factory Admin Portal:</strong> Work-order routing, specification
+            versioning, inventory roll allocation, commercial invoicing, subcontract tracking, and 10
+            specialized operational reports.
+          </li>
+          <li>
+            <strong className="text-navy">Floor Worker Portal:</strong> High-contrast, touch-friendly terminal
+            views allowing station operators to log roll consumption, record defect causes, and update stage
+            handoffs.
+          </li>
+        </ul>
 
         {/* Workflow Architecture Diagram */}
         <div className="my-6 rounded-lg border border-border bg-surface/60 p-5 font-mono text-xs text-foreground/90 overflow-x-auto">
           <p className="text-[11px] font-sans font-semibold uppercase tracking-wider text-bronze mb-3">
-            System Workflow &amp; State Validation Architecture
+            Garment Manufacturing State Machine &amp; Multi-Tenant Topology
           </p>
           <pre className="leading-relaxed whitespace-pre font-mono text-[11px] sm:text-xs">
-{`[ Work Order Created ]
-         │
-         ▼
-┌──────────────────┐
-│  Material Intake │ ──(Batch Assignment)──┐
-└──────────────────┘                       │
-         │                                 │ (Idempotent State Check)
-         ▼                                 │
-┌──────────────────┐                       │
-│ Assembly Station │ ──(Status Mutation)───┤
-└──────────────────┘                       │
-         │                                 │
-         ▼                                 │
-┌──────────────────┐                       │
-│ Quality Control  │ ──(QA Verification)───┤
-└──────────────────┘                       │
-         │                                 │
-         ▼                                 ▼
-┌──────────────────┐            ┌────────────────────────┐
-│ Final Packaging  │            │ Supervisor Live Status │
-└──────────────────┘            └────────────────────────┘`}
+{`┌────────────────────────────────────────────────────────────────────────┐
+│                        Multi-Tenant Routing Layer                      │
+│      (Host-derived tenant database resolution / Non-destructive schema) │
+└────────────────────────────────────┬───────────────────────────────────┘
+                                     │
+           ┌─────────────────────────┴─────────────────────────┐
+           ▼                                                   ▼
+┌─────────────────────────────┐                     ┌────────────────────┐
+│   Work-Run State Engine     │                     │ Material Inventory │
+│ 4 Work Types:               │                     │ (Roll-Level Stock) │
+│ - Sampling                  │                     │ - Rolls In/Out     │
+│ - Re-sampling               │                     │ - Shrinkage/Cut    │
+│ - Final Re-sampling         │                     │ - Balance Reconcil │
+│ - Full Production           │                     └──────────┬─────────┘
+└──────────┬──────────────────┘                                │
+           │                                                   │
+           ▼                                                   │
+┌─────────────────────────────┐                                │
+│ Sequential Department Stages│ ◄──────────────────────────────┘
+│ Cutting ──► Sewing ──► QA Inspection ──► Packing & Dispatch
+│             │          │
+│             ▼          ▼
+│      [Subcontract] [Rejection Routing by Cause Code]`}
           </pre>
         </div>
       </CaseStudySection>
 
-      {/* 2. The Operational Problem */}
-      <CaseStudySection title="2. The Operational Problem" id="problem-heading">
+      {/* 2. Before vs. After Engineering Metrics */}
+      <CaseStudySection title="2. Codebase Transformation: Before vs. After" id="metrics-heading">
         <p>
-          Prior to this implementation, assembly progress was tracked through physical job tickets
-          and handwritten tally sheets. While simple to deploy, this approach introduced severe
-          operational friction as manufacturing volume increased:
+          Over a 6-month period across 214 commits (including a 43.6k-line refactoring milestone touching
+          361 files), I drove the structural transition from a fragile, controller-heavy monolithic
+          prototype into a strictly typed, tested, service-oriented architecture.
         </p>
-        <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
-          <li>
-            <strong className="text-navy">Station Starvation &amp; Bottlenecks:</strong> When an
-            upstream machine experienced downtime or parts shortage, downstream stations were
-            idled. Floor supervisors had no proactive indicator of these delays until physical queues
-            visibly emptied.
-          </li>
-          <li>
-            <strong className="text-navy">Traceability Deficits:</strong> If an assembly defect was
-            detected during final packaging or post-dispatch, locating the specific workstation,
-            batch run, or operator log required hours of manual ticket cross-referencing.
-          </li>
-          <li>
-            <strong className="text-navy">Reporting Latency:</strong> Daily production metrics
-            could only be compiled hours after a shift concluded, preventing managers from making
-            adjustments during active production runs.
-          </li>
-        </ul>
-      </CaseStudySection>
 
-      {/* 3. My Role & Responsibilities */}
-      <CaseStudySection title="3. My Role &amp; Responsibilities" id="role-heading">
-        <p>
-          As a full-stack developer on the project, I was responsible for delivering the core
-          station tracking interface, the backend routing architecture, and the data schema
-          supporting batch transitions. My personal responsibilities included:
-        </p>
-        <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
-          <li>
-            <strong className="text-navy">Frontend Station Terminal:</strong> Architected the
-            touchscreen interface in React and TypeScript, handling input from barcode scanners,
-            optimistic local UI updates, and clear status feedback.
-          </li>
-          <li>
-            <strong className="text-navy">Backend API Contracts:</strong> Designed and implemented
-            RESTful endpoints in Laravel for order creation, station handoff transitions, and batch
-            cancellations.
-          </li>
-          <li>
-            <strong className="text-navy">Relational Data Modeling:</strong> Structured MySQL database
-            schemas with foreign-key constraints, audit log tables, and indexing optimized for
-            frequent status lookups by active order ID.
-          </li>
-          <li>
-            <strong className="text-navy">Supervisor Summary Dashboard:</strong> Built responsive
-            overview pages aggregating station queue lengths, active cycle times, and inspection pass
-            rates for floor monitors.
-          </li>
-        </ul>
-      </CaseStudySection>
-
-      {/* 4. Technology Stack */}
-      <CaseStudySection title="4. Technology Stack" id="tech-heading">
-        <p>
-          We chose proven, maintainable technologies that prioritized long-term reliability and
-          straightforward maintainability over complex runtime environments:
-        </p>
-        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-3">
-          <div className="rounded border border-border bg-surface/40 p-4">
-            <dt className="font-semibold text-navy">Frontend: React &amp; TypeScript</dt>
-            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
-              Provides strict typing across work-order models, deterministic client state transitions,
-              and low-overhead DOM rendering on floor terminals.
-            </dd>
-          </div>
-          <div className="rounded border border-border bg-surface/40 p-4">
-            <dt className="font-semibold text-navy">Backend: PHP &amp; Laravel</dt>
-            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
-              Delivers reliable database transaction management, structured routing, request
-              validation, and clean domain services for order lifecycle management.
-            </dd>
-          </div>
-          <div className="rounded border border-border bg-surface/40 p-4">
-            <dt className="font-semibold text-navy">Database: MySQL (InnoDB)</dt>
-            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
-              Enforces ACID transactional guarantees, row-level locking for concurrent station updates,
-              and relational integrity across work orders, stations, and logs.
-            </dd>
-          </div>
-          <div className="rounded border border-border bg-surface/40 p-4">
-            <dt className="font-semibold text-navy">Styling: Tailwind CSS</dt>
-            <dd className="mt-1 text-foreground/80 text-xs sm:text-sm leading-relaxed">
-              Allowed rapid construction of accessible, high-contrast user interfaces with
-              touch-friendly sizing (48px+ touch targets) and consistent utility tokens.
-            </dd>
-          </div>
-        </dl>
-      </CaseStudySection>
-
-      {/* 5. Key Engineering Challenge */}
-      <CaseStudySection title="5. Key Engineering Challenge: Concurrency &amp; State Integrity" id="challenge-heading">
-        <p>
-          In a fast-paced manufacturing environment, workstation terminals are subject to erratic
-          user inputs. Operators frequently trigger multiple scanner inputs in rapid succession,
-          or multiple stations may simultaneously attempt to record actions on adjacent batch items.
-        </p>
-        <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6 space-y-3">
-          <h3 className="font-serif text-lg sm:text-xl font-bold text-navy">
-            The Problem: Out-of-Sequence Mutations &amp; Duplicate Records
-          </h3>
-          <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
-            Without strict safeguards, rapid double-scanning could cause an order to register
-            completion twice, log contradictory timestamps, or prematurely advance to &ldquo;Packaging&rdquo;
-            before receiving formal &ldquo;QA Inspection&rdquo; sign-off. In addition, temporary factory
-            Wi-Fi degradation meant client terminals could queue and resend requests out of order.
-          </p>
+        <div className="my-4 overflow-x-auto">
+          <table className="w-full text-left text-xs sm:text-sm border-collapse border border-border">
+            <thead>
+              <tr className="bg-surface/80 text-navy font-semibold">
+                <th className="border border-border p-2.5 sm:p-3">Structural Area</th>
+                <th className="border border-border p-2.5 sm:p-3">Baseline (Oct 1)</th>
+                <th className="border border-border p-2.5 sm:p-3">Refactored</th>
+                <th className="border border-border p-2.5 sm:p-3">Net Impact</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/60 text-foreground/85">
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  Domain Service Classes
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">1 service</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">20 services</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  +1,900% (domain decoupling)
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  Repository Classes
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">22 repositories</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">40 repositories</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  +82% (query isolation)
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  Backend Automated Tests
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">1 PHP test file</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">45 test files (279 tests)</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  +4,400% (533 assertions)
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  Frontend Test Suites
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">0 test files</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">33 Vitest files (166 tests)</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  New automated harness
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  TypeScript Compilation
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-bronze">Failing (exit code 2)</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">0 type errors</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  Strict mode clean
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  Database Migrations
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">83 migrations</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">115 migrations</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  +32 versioned schemas
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  Shared UI Components
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">15 components</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">29 components</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  +93% reuse in <code>common/</code>
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border p-2.5 sm:p-3 font-medium text-navy">
+                  Total Code Volume
+                </td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">91.6k lines (PHP/TS)</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono">106.6k lines</td>
+                <td className="border border-border p-2.5 sm:p-3 font-mono text-teal font-semibold">
+                  413 API routes across 85 controllers
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </CaseStudySection>
 
-      {/* 6. The Engineering Solution */}
-      <CaseStudySection title="6. The Engineering Solution" id="solution-heading">
+      {/* 3. Core Architectural Contributions */}
+      <CaseStudySection title="3. Core Architectural Contributions" id="contributions-heading">
+        <div className="space-y-6">
+          {/* Contribution 1 */}
+          <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6 space-y-3">
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-navy">
+              1. Domain Service Layer Refactoring (1 &rarr; 20 Services)
+            </h3>
+            <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
+              The original architecture stuffed multi-thousand-line database queries, validation rules,
+              and PDF exports directly into controller methods. I spearheaded the extraction of domain
+              logic into 20 focused, testable domain services.
+            </p>
+            <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
+              These services encapsulate core factory operations: stock posting, commercial billing, the
+              work-run state machine, specification versioning, subcontract ledger management, and tenant
+              database provisioning.
+            </p>
+          </div>
+
+          {/* Contribution 2 */}
+          <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6 space-y-3">
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-navy">
+              2. Unified Work-Run State Engine (4 Work Types)
+            </h3>
+            <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
+              Garment factories handle prototyping fundamentally differently than bulk production. I
+              architected a single, unified work-run state machine that reliably orchestrates four
+              distinct order workflows: <em>Sampling</em>, <em>Re-sampling</em>, <em>Final Re-sampling</em>,
+              and <em>Full Production</em>.
+            </p>
+            <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
+              The engine enforces sequential department stage handoffs (Cutting &rarr; Sewing &rarr; QA &rarr; Packing),
+              manages rejection routing by cause code (e.g. stitch defect, measurement variance, dye stain),
+              and provides idempotent publication to prevent double-logging completions.
+            </p>
+          </div>
+
+          {/* Contribution 3 */}
+          <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6 space-y-3">
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-navy">
+              3. Resilient Multi-Tenant Database Provisioning
+            </h3>
+            <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
+              Tenant database synchronization was previously a high-risk manual procedure prone to schema
+              drift. I automated the provisioning pipeline:
+            </p>
+            <ul className="list-disc list-outside ml-6 space-y-1.5 text-sm sm:text-base text-foreground/85">
+              <li>
+                In production rehearsals, a single <code>company --all</code> command applied 204 migrations
+                across 11 independent tenant databases, reconciling all 11 to 113 of 113 migrations without
+                data loss.
+              </li>
+              <li>
+                One legacy tenant was brought from 96 to 113 migrations without requiring a destructive reset.
+              </li>
+              <li>
+                New tenant creation via the Super-Admin UI deterministically bootstraps 113 migrations, 90
+                relational tables, and seeded factory administrator roles.
+              </li>
+              <li>
+                Made all master-database migration runs non-destructive by default.
+              </li>
+            </ul>
+          </div>
+
+          {/* Contribution 4 */}
+          <div className="rounded-lg border border-border bg-surface/40 p-5 sm:p-6 space-y-3">
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-navy">
+              4. Critical Data-Integrity Fixes
+            </h3>
+            <p className="text-sm sm:text-base leading-relaxed text-foreground/85">
+              Identified and resolved severe data corruption bugs in production logic:
+            </p>
+            <ul className="list-disc list-outside ml-6 space-y-1.5 text-sm sm:text-base text-foreground/85">
+              <li>
+                <strong className="text-navy">Roll Stock-Out Reversal Defect:</strong> Material stock-out
+                events previously failed to decrement specific source fabric rolls. When an operator deleted
+                a stock movement, the system added phantom inventory back that was never actually subtracted.
+                Re-engineered roll-level atomic deductions to maintain physical inventory parity.
+              </li>
+              <li>
+                <strong className="text-navy">Worker Roll Measure Reports:</strong> Repaired broken worker
+                tracking reports that previously rendered <code>0.00</code> across all measures to accurately
+                compute live roll metrics (verified across 15 production rolls).
+              </li>
+              <li>
+                <strong className="text-navy">HTTP 500 Route Hardening:</strong> Replaced 6 legacy unhandled
+                error routes with clean 404/validation responses, fixing a hard 500 crash on the sample orders
+                list and a hard 400 on the dashboard summary.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </CaseStudySection>
+
+      {/* 4. Commercial Math & Parity Verification */}
+      <CaseStudySection title="4. Exact-Decimal Commercial Calculations &amp; Parity" id="commercial-heading">
         <p>
-          To ensure absolute data consistency, I implemented a two-part architectural pattern
-          combining an explicit backend state machine with database transaction locks:
+          Garment manufacturing contracts hinge on fraction-of-a-cent precision across material shrinkage,
+          subcontract piece rates, and tiered tax invoicing. Floating-point arithmetic errors previously
+          caused rounding discrepancies between backend invoice generation and frontend client previews.
+        </p>
+        <p>
+          I introduced exact-decimal commercial calculation utilities covering invoice totals, tax
+          breakdowns, rounding rules, and allocation limits. In addition, I created a spreadsheet-formula-safe
+          CSV export engine shared between PHP and the frontend, backed by a parity test suite validating
+          25 shared vectors across both runtimes.
+        </p>
+        <div className="rounded border border-border bg-surface/60 p-4 font-mono text-xs text-navy">
+          <p className="font-sans font-semibold text-bronze uppercase tracking-wider text-[11px] mb-2">
+            Verified Rehearsal Evidence Figures
+          </p>
+          <ul className="space-y-1">
+            <li>&bull; Worker hours calculation: 8 &times; 250.00 = 2,000.00</li>
+            <li>&bull; Subcontract charge rate: 85 &times; 12.50 = 1,062.50</li>
+            <li>&bull; Stock dispatch split ratio: 100 / 60 / 40</li>
+            <li>&bull; Reconciled invoice total: 48,307.50</li>
+          </ul>
+        </div>
+      </CaseStudySection>
+
+      {/* 5. Security & Test Isolation */}
+      <CaseStudySection title="5. Security Hardening &amp; Fail-Closed Test Isolation" id="security-heading">
+        <p>
+          Operational systems in manufacturing hubs require defensive security posture and strict test
+          guardrails:
         </p>
         <div className="space-y-4 text-sm sm:text-base">
           <div className="border-l-2 border-teal pl-4 space-y-1.5">
-            <h4 className="font-semibold text-navy">1. Enforced State Machine Transition Rules</h4>
+            <h4 className="font-semibold text-navy">Capability-Based Authorization Middleware</h4>
             <p className="text-foreground/85 leading-relaxed">
-              Every job order lifecycle was modeled as an explicit state graph (e.g. <code>PENDING</code> &rarr;{" "}
-              <code>IN_ASSEMBLY</code> &rarr; <code>AWAITING_QA</code> &rarr; <code>QA_PASSED</code> &rarr;{" "}
-              <code>PACKAGED</code>). Each transition required validating that all prerequisite conditions were
-              satisfied before the state could advance.
+              Implemented portal-level capability authorization, locking down endpoints across Super-Admin,
+              Admin, and Worker contexts. Pinned approximately 25 route-to-permission mappings with automated
+              regression tests. Fixed missing authorization gates on work-run detail reads.
             </p>
           </div>
 
           <div className="border-l-2 border-teal pl-4 space-y-1.5">
-            <h4 className="font-semibold text-navy">2. Pessimistic Row Locking &amp; Idempotent API Keys</h4>
+            <h4 className="font-semibold text-navy">Host-Derived Tenant QR Enforcement</h4>
             <p className="text-foreground/85 leading-relaxed">
-              Within Laravel, status mutation requests were wrapped in database transactions using{" "}
-              <code>SELECT ... FOR UPDATE</code> on the target order row. If a duplicate request arrived
-              with the same transition payload, the server recognized the current order state and
-              safely returned the existing record without applying redundant mutations.
+              Closed a critical tenant-selection spoofing vulnerability on the public QR endpoint. Tenant
+              identity is now strictly derived from the validated HTTP request host, preventing malicious
+              cross-tenant data leakage. Removed a legacy credential-in-URL debug login route.
             </p>
           </div>
 
           <div className="border-l-2 border-teal pl-4 space-y-1.5">
-            <h4 className="font-semibold text-navy">3. Contract Synchronization with TypeScript</h4>
+            <h4 className="font-semibold text-navy">Fail-Closed Test Database Isolation</h4>
             <p className="text-foreground/85 leading-relaxed">
-              I established shared TypeScript interface definitions reflecting the exact Laravel API
-              resource schemas. This prevented contract drift and ensured client-side validation
-              mirrored backend rules, notifying operators immediately if a barcode did not meet batch
-              criteria.
+              Configured automated test suites to refuse execution unless connected to a verified disposable
+              test database, eliminating accidental test-data pollution in staging or production factory
+              tenants.
             </p>
           </div>
         </div>
       </CaseStudySection>
 
-      {/* 7. Lessons & Takeaways */}
-      <CaseStudySection title="7. Lessons &amp; Engineering Reflections" id="lessons-heading">
-        <p>
-          Building software for physical operations reinforced several core engineering principles:
-        </p>
+      {/* 6. Key Engineering Lessons */}
+      <CaseStudySection title="6. Engineering Takeaways" id="lessons-heading">
         <ul className="list-disc list-outside ml-6 space-y-2 text-base text-foreground/85">
           <li>
-            <strong className="text-navy">Simplicity Trumps Cleverness:</strong> High-stress workplace
-            tools must prioritize straightforward workflows and predictable behavior over complex,
-            multi-layer abstractions that are difficult to diagnose during a production stop.
+            <strong className="text-navy">Controllers are Gateways, Not Warehouses:</strong> Moving domain
+            logic out of controllers into 20 focused services proved that software complexity is best managed
+            through small, single-responsibility boundaries that can be individually verified.
           </li>
           <li>
-            <strong className="text-navy">Defensive Boundaries are Mandatory:</strong> Never rely
-            solely on frontend validation. In operational systems, network hiccups and unintended
-            double-taps are regular occurrences, making idempotent backend checks essential.
+            <strong className="text-navy">Multi-Tenant Migrations Require Strict Rehearsals:</strong> Database
+            migrations across dozens of tenant databases cannot rely on hope. Explicit schema reconciliation
+            scripts and non-destructive migrations are mandatory for enterprise reliability.
           </li>
           <li>
-            <strong className="text-navy">Ergonomics Extend Beyond Code:</strong> Developing a good
-            system requires understanding the physical workstation: screen distance, lighting,
-            hardware scanners, and glove use all inform UI layout, contrast, and tap targets.
+            <strong className="text-navy">Strict Types Catch What Humans Miss:</strong> Taking TypeScript
+            from failing (`exit 2`) to 0 errors eliminated dozens of dormant frontend bugs around nullable API
+            payloads and state mismatches.
           </li>
         </ul>
       </CaseStudySection>

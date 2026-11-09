@@ -117,10 +117,10 @@ export default function HomePage() {
               caseStudyHref="/projects/bhetiyo"
             />
             <ProjectPreview
-              title="Production Line Management System"
-              oneLiner="An operational system for tracking manufacturing workflows, station handoffs, and assembly throughput in real time."
-              contribution="Architected the reactive station state model in React and TypeScript, designed RESTful backend API contracts in Laravel for batch order routing, and engineered responsive floor dashboards for supervisors."
-              technologies={["React", "TypeScript", "Laravel", "MySQL", "Tailwind CSS", "REST APIs"]}
+              title="Garment Factory Production Management System (PMS)"
+              oneLiner="A multi-tenant factory operations platform on Laravel 10 and React 18/TypeScript with 3 portals (super-admin, admin, worker) and a unified work-run state machine."
+              contribution="Over 214 commits, extracted domain logic into 20 services (1 → 20), built a work-run engine for 4 order types, automated multi-tenant migration reconciliation across 11 databases, fixed critical roll stock-out defects, and scaled test coverage to 279 PHPUnit and 166 Vitest tests with 0 TypeScript errors."
+              technologies={["Laravel 10", "PHP", "React 18", "TypeScript", "MySQL", "PHPUnit", "Vitest", "Tailwind CSS"]}
               type="Professional experience · Case study"
               caseStudyHref="/projects/production-line-management"
             />

@@ -105,27 +105,33 @@ export default function ResumePage() {
             <article>
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
                 <h3 className="font-serif text-lg font-bold text-navy">
-                  Software Developer &middot; Web Applications &amp; Business Systems
+                  Full-Stack &amp; Backend Architect &middot; Garment Factory PMS
                 </h3>
                 <span className="text-xs font-mono text-muted shrink-0">
-                  Production Systems &amp; ERP
+                  Multi-Tenant Manufacturing Platform
                 </span>
               </div>
               <p className="text-xs font-mono text-bronze mb-3">
-                React &middot; TypeScript &middot; PHP &middot; Laravel &middot; MySQL
+                Laravel 10 &middot; React 18 &middot; TypeScript &middot; MySQL &middot; PHPUnit &middot; Vitest
               </p>
               <ul className="list-disc list-outside ml-4 space-y-2 text-sm text-foreground/85 leading-relaxed">
                 <li>
-                  Developed and maintained business management web applications utilizing React, TypeScript, PHP, and Laravel.
+                  Engineered a multi-tenant garment-factory PMS on Laravel 10 and React 18/TypeScript with 3 portals (Super-Admin, Admin, Worker) spanning ~106k lines across 85 controllers, 40 repositories, and 115 migrations.
                 </li>
                 <li>
-                  Contributed to production tracking systems enabling accurate monitoring of manufacturing and assembly workflows.
+                  Refactored domain logic out of bloated controllers into 20 focused domain services (1 &rarr; 20) covering stock posting, commercial billing, specification versioning, subcontracting, and tenant provisioning.
                 </li>
                 <li>
-                  Engineered modules for accounting and ERP platforms, focusing on database integrity, billing reconciliations, and reporting accuracy.
+                  Designed a unified work-run state engine covering 4 work types (sampling, re-sampling, final re-sampling, production) with sequential department handoffs and rejection routing by defect cause.
                 </li>
                 <li>
-                  Implemented specialized commercial tools including restaurant billing systems, parking and ticketing solutions, and e-commerce platforms.
+                  Scaled automated test coverage from 1 PHP test file to 45 (279 PHPUnit tests / 533 assertions) plus 33 Vitest frontend test files (166 tests), bringing strict TypeScript compiler errors to zero.
+                </li>
+                <li>
+                  Hardened multi-tenant architecture: automated provisioning across 11 tenant databases (204 migrations reconciled to 113/113), added capability-based portal authorization middleware pinned by 25 tests, and eliminated host-spoofing vulnerabilities.
+                </li>
+                <li>
+                  Resolved critical data-integrity defects including roll-level stock-out tracking, worker measurement reporting, and implemented exact-decimal calculation with a shared 25-vector parity test suite.
                 </li>
               </ul>
             </article>
